@@ -23,7 +23,6 @@ def main(imp):
 
         elif object.group('display'):
             print(soma_calculadora)
-            soma_calculadora = 0
 
 if __name__ == "__main__":
     main(sys.argv)
