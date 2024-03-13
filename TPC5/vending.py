@@ -8,19 +8,46 @@ tokens = [
         'SALDO',
         'MOEDA',
         'SELECIONAR',
+        'ADICIONAR'
     ]
 
-def t_SELECIONAR(t):
-    r'SELECIONAR\s\w+'
+def t_ADICIONAR(t):
+    r'ADICIONAR\s\w+\s\d+'
     produto = t.value.split()[1]
-    if produto in t.lexer.data:
-        if t.lexer.saldo >= t.lexer.data[produto]['preco']:
-            t.lexer.saldo -= t.lexer.data[produto]['preco']
-            print(f"Compra efetuada com sucesso: {produto}")
+    quantidade = int(t.value.split()[2])
+    if produto in t.lexer.data['stock']:
+        if produto['id'] == produto:
+            produto['quantidade'] += quantidade
+            produto['preco'] = preco
+            with open("vending.json", "w", encoding="utf-8") as file:
+                json.dump(t.lexer.data, file, indent=2, ensure_ascii=False)
+            print(f"Produto reposto com sucesso: {produto}")
         else:
-            print(f"Saldo insuficiente para comprar: {produto}")
+            print(f"Produto inexistente: {produto}")
     else:
-        print(f"Produto inexistente: {produto}")
+        print("Adicionar novo produto: " + produto)
+        id_produto = t.lexer.data['stock'][-1]['id'] + 1
+        preco = input("Insira o preço do produto: ")
+        with open("vending.json", "w", encoding="utf-8") as file:
+            t.lexer.data['stock'].append({'id': id_produto, 'nome': produto, 'quantidade': quantidade, 'preco': preco})
+            json.dump(t.lexer.data, file, indent=2, ensure_ascii=False)
+    return t
+
+def t_SELECIONAR(t):
+    r'SELECIONAR\s\d+'
+    produto_id = int(t.value.split()[1])
+    for elem in t.lexer.data['stock']:
+        if elem['id'] == produto_id:
+            if elem['quantidade'] > 0:
+                print(f"Produto selecionado: {elem['nome']}")
+                elem['quantidade'] -= 1
+                with open("vending.json", "w", encoding="utf-8") as file:
+                    json.dump(t.lexer.data, file, indent=2, ensure_ascii=False)
+            else:
+                print(f"Produto esgotado: {elem['nome']}")
+            break
+    else:
+        print(f"Produto inexistente: {produto_id}")
     return t
 
 t_ignore = ' \t\n'
@@ -45,9 +72,11 @@ def t_MOEDA(t):
 
 def t_LISTAR(t):
     r'LISTAR'
-    for produto, detalhes in t.lexer.data.items():
-        print(f"{produto}: {detalhes['preco']}€")
-        
+    print("""maq:
+cod | nome | quantidade |  preço
+------------------------------------""")
+    for produto in t.lexer.data['stock']:
+        print(f"{produto['id']} | {produto['nome']} | {produto['quantidade']} | Preço: {produto['preco']}\n")
     return t
 
 def t_SAIR(t):
@@ -75,7 +104,8 @@ def main():
         - SALDO
         - MOEDA <quantia>e e/ou <quantia>c
         - LISTAR
-        - SELECIONAR <produto>  
+        - SELECIONAR <ID produto>  
+        - ADICIONAR <Nome produto> <quantidade>
         - SAIR
         """
     

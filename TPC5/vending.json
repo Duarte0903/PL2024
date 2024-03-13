@@ -1,36 +1,76 @@
 {
-    "kitkat": {
-        "id": 1,
-        "preco": 1.50
+  "stock": [
+    {
+      "id": 1,
+      "nome": "kitkat",
+      "quantidade": 10,
+      "preco": 1.5
     },
-
-    "chocolate": {
-        "id": 2,
-        "preco": 2.00
+    {
+      "id": 2,
+      "nome": "doritos",
+      "quantidade": 10,
+      "preco": 3.5
     },
-
-    "gomas": {
-        "id": 3,
-        "preco": 0.50
+    {
+      "id": 3,
+      "nome": "coca-cola",
+      "quantidade": 10,
+      "preco": 2.5
     },
-
-    "batatas": {
-        "id": 4,
-        "preco": 1.00
+    {
+      "id": 4,
+      "nome": "pepsi",
+      "quantidade": 10,
+      "preco": 2.5
     },
-
-    "kebab": {
-        "id": 5,
-        "preco": 3.00
+    {
+      "id": 5,
+      "nome": "fanta",
+      "quantidade": 10,
+      "preco": 2.5
     },
-
-    "hamburguer": {
-        "id": 6,
-        "preco": 2.50
+    {
+      "id": 6,
+      "nome": "guarana",
+      "quantidade": 10,
+      "preco": 2.5
     },
-
-    "caviar": {
-        "id": 7,
-        "preco": 100.00
+    {
+      "id": 7,
+      "nome": "skol",
+      "quantidade": 10,
+      "preco": 3.5
+    },
+    {
+      "id": 8,
+      "nome": "brahma",
+      "quantidade": 10,
+      "preco": 3.5
+    },
+    {
+      "id": 9,
+      "nome": "heineken",
+      "quantidade": 10,
+      "preco": 4.5
+    },
+    {
+      "id": 10,
+      "nome": "budweiser",
+      "quantidade": 10,
+      "preco": 4.5
+    },
+    {
+      "id": 11,
+      "nome": "wrap",
+      "quantidade": 8,
+      "preco": 3
+    },
+    {
+      "id": 12,
+      "nome": "sande",
+      "quantidade": 2,
+      "preco": "2.50"
     }
+  ]
 }
