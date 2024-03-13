@@ -16,3 +16,18 @@ Este trabalho tem como objetivo a implementação de uma máquina de vending. Ne
 
 ## Resolução
 
+A lista tokens define os tipos de tokens que o analisador léxico reconhecerá. Cada token é definido por uma função com um prefixo t_. Essas funções usam expressões regulares para corresponder a entrada do usuário a um tipo de token específico.
+
+A função t_ADICIONAR é chamada quando o usuário quer adicionar um produto à máquina. Ela verifica se o produto já existe no estoque. Se existir, a quantidade é aumentada. Se não, um novo produto é criado.
+
+A função t_SELECIONAR é usada para selecionar um produto para compra. Ela verifica se o produto existe e se há quantidade suficiente disponível. Se sim, a quantidade do produto é reduzida.
+
+A função t_SALDO exibe o saldo atual do usuário.
+
+A função t_MOEDA é usada para adicionar dinheiro à máquina. Ela aceita valores em euros e centimos.
+
+A função t_LISTAR lista todos os produtos disponíveis na máquina.
+
+A função t_SAIR é usada para terminar a sessão do usuário e devolver o troco.
+
+A função t_error é chamada quando a entrada do usuário não corresponde a nenhum dos tokens definidos.

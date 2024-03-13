@@ -1,26 +1,37 @@
 import sys
-import re
-from ply.lex import lex
+import ply.lex as lex
 
 tokens = (
-    'COMMAND',
+    'SELECT',
     'FROM',
     'WHERE',
-    'VARS_TABS',
-    'VALORES',
-    'SIMBOLOS',
-    'SEPARADORES'
+    'INFO',
+    'NUMBER',
+    'FLOAT', 
+    'EQUAL',
+    'GREATER',
+    'LESS',
+    'COMMA',
 )
 
-t_COMMAND = r'[Ss][Ee][Ll][Ee][Cc][Tt]|[Uu][Pp][Dd][Aa][Tt][Ee]|[Dd][Ee][Ll][Ee][Tt][Ee]'
-t_FROM = r'[Ww][Hh][Ee][Rr][Ee]'
-t_WHERE = r'[Ff][Rr][Oo][Mm]'
-t_VARS_TABS = r'[A-Za-z]\w*'
-t_VALORES = r'-?\d+'
-t_SEPARADORES = r",|;"
-t_SIMBOLOS = r'>=|<=|<|>|==|='
+t_SELECT = r'Select'
+t_FROM = r'From'
+t_WHERE = r'Where'
 
-t_ignore = ' \t'
+t_INFO = r'\w+'
+
+t_NUMBER = r'\d+'
+t_FLOAT = r'\d+\.\d+'
+t_EQUAL = r'\='
+t_GREATER = r'\>'
+t_LESS = r'\<'
+t_COMMA = r'\,'
+
+t_ignore = " \t"
+
+def t_newline(t):
+    r'\n+'
+    t.lexer.lineno += len(t.value)
 
 def t_error(t):
     print("Illegal character '%s'" % t.value[0])
